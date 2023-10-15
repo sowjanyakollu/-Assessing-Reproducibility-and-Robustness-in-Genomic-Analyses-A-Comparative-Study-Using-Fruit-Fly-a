@@ -30,7 +30,9 @@ This project is rooted in the necessity for a rigorous evaluation of the reliabi
 - python v 3.9 https://www.python.org/downloads/
 - virtual machine https://www.virtualbox.org/wiki/Downloads
 - in virtual machine use the linux ubutu 64 bit
- -bowtie2 
+ -bowtie2
+ - feature counts
+ - salmon same version given in the link along with the documentation -  https://combine-lab.github.io/salmon/
 ## Getting Started
 
 - install all the above softwares to get started with the project
