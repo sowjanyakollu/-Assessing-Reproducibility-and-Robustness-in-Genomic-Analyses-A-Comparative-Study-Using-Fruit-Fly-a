@@ -36,7 +36,9 @@ This project is rooted in the necessity for a rigorous evaluation of the reliabi
 - install all the above softwares to get started with the project
 ## the datasets can be downloaded form the below link 
 - https://www.ncbi.nlm.nih.gov/datasets/taxonomy/7227/
- the fruit fly (Drosophila melanogaster), as it is widely used as an experimental model organism and its genome is small enough that you should not run into any problem in terms of scalability. You can access the data by going to the fruit fly page on the NCBI websiteLinks to an external site. and scrolling down to the download button. Select "RefSeq only" and download the genome sequences (FASTA), the annotation (GTF) and the transcripts (FASTA). You will get a zip file of just under 68MB.
+- the fruit fly (Drosophila melanogaster), as it is widely used as an experimental model organism and its genome is small enough that you should not run into any problem in terms of scalability.
+- You can access the data by going to the fruit fly page on the NCBI websiteLinks to an external site. and scrolling down to the download button.
+- -Select "RefSeq only" and download the genome sequences (FASTA), the annotation (GTF) and the transcripts (FASTA). You will get a zip file of just under 68MB.
 ## The codes to every software is given in the each code file 
 
 
