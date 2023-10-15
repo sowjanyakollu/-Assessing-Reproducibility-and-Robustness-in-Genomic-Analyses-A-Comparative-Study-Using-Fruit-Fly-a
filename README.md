@@ -22,19 +22,20 @@ This project is rooted in the necessity for a rigorous evaluation of the reliabi
 ## Dependencies
 
 - use virtual machine and install Ubuntu 18.04.5 (August 2020) is the latest long-term support (LTS) version of the Ubuntu
-operating system that is supported by VirtualBox. You can download this version of Ubuntu here (2 Gb).
-The virtual machine will run as a guest on your host machine. The host (your computer) should have at least 8Gb of RAM and a modern CPU. Ideally, 16Gb of RAM is required.
-You will also need VirtualBox installed on your host machine in order to run the virtual machine.
-You can download VirtualBox here
-R studio https://posit.co/download/rstudio-desktop/
-python v 3.9 https://www.python.org/downloads/
-virtual machine https://www.virtualbox.org/wiki/Downloads
-in virtula machine use the linux ubutu 64 bit
+- operating system that is supported by VirtualBox. You can download this version of Ubuntu here (2 Gb).
+- The virtual machine will run as a guest on your host machine. The host (your computer) should have at least 8Gb of RAM and a modern CPU. Ideally, 16Gb of RAM is required.
+- You will also need VirtualBox installed on your host machine in order to run the virtual machine.
+- You can download VirtualBox here
+  - R studio https://posit.co/download/rstudio-desktop/
+- python v 3.9 https://www.python.org/downloads/
+- virtual machine https://www.virtualbox.org/wiki/Downloads
+- in virtual machine use the linux ubutu 64 bit
+ -bowtie2 
 ## Getting Started
 
--install all the above softwares to get started with the project
+- install all the above softwares to get started with the project
 
-the codes to every software is given in the each code file
+## The codes to every software is given in the each code file 
 
 
 
