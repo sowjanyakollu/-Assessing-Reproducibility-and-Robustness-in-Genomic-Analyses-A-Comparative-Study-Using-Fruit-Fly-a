@@ -1,0 +1,24 @@
+BUILDING INDEX 
+
+bowtie2-build genome.fasta genome_index
+
+CREATING SAM files 
+
+bowtie2 -x GCF_genomic_index -f -U errored_sample1.fasta -S output_alignment1.sam
+bowtie2 -x GCF_genomic_index -f -U errored_sample2.fasta -S output_alignment2.sam
+bowtie2 -x GCF_genomic_index -f -U errored_sample3.fasta -S output_alignment3.sam
+bowtie2 -x GCF_genomic_index -f -U errored_sample4.fasta -S output_alignment4.sam
+
+CONVERTING TO BAM files
+
+samtools view -bS output_alignment1.sam | samtools sort -o sorted_alignment1.bam
+samtools view -bS output_alignment2.sam | samtools sort -o sorted_alignment2.bam
+samtools view -bS output_alignment3.sam | samtools sort -o sorted_alignment3.bam
+samtools view -bS output_alignment4.sam | samtools sort -o sorted_alignment4.bam
+
+GENERATING COUNT SET using Feature Counts
+
+featureCounts -T 2 -a genomic.gtf -o output_counts1.txt sorted_alignment1.bam
+featureCounts -T 2 -a genomic.gtf -o output_counts2.txt sorted_alignment2.bam
+featureCounts -T 2 -a genomic.gtf -o output_counts3.txt sorted_alignment3.bam
+featureCounts -T 2 -a genomic.gtf -o output_counts4.txt sorted_alignment4.bam

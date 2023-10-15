@@ -1,0 +1,39 @@
+CODE/SCRIPT
+1.	Index Your Reference Transcriptome:
+salmon index -t rna.fna -i salmon_index
+
+2.	Quantify RNA-seq data:
+Performed quantification with rna.fasta file with errored reads and with original reads.
+salmon quant -i salmon_index -l A -r rna.fasta errored_sample1.fasta -o quant_output
+
+3.	Imported transcript-level abundance data using tximport:
+txi <- tximport(files1, type="salmon", txIn = FALSE, txOut = FALSE, geneIdCol = 'Name')
+
+4.	Created a DESeqDataSet from Transcript-Level Abundance Data Using DESeq2:
+library("DESeq2")
+ddsTxi <- DESeqDataSetFromTximport(txi,
+                                   colData = metadata,
+                                   design = ~ Group)
+
+5.	dds <- DESeq(ddsTxi)
+dds <- DESeq(dds)
+res <- results(dds)
+
+plotMA(res)
+
+p_values <- res$pvalue
+dds <- estimateSizeFactors(ddsTxi)
+normalized_counts <- counts(ddsTxi, normalized=FALSE)
+### Transform counts for data visualization
+rld <- rlog(ddsTxi, blind=TRUE)
+### Plot PCA
+plotPCA(rld, intgroup="Group")
+# Input is a matrix of log transformed values
+rld <- rlog(dds, blind=T)
+rld_mat <- assay(rld)
+pca <- prcomp(t(rld_mat))
+
+# Get the plot for distribution estimates
+dds <- DESeq(ddsTxi)
+
+plotDispEsts(dds)

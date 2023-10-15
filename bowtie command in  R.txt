@@ -1,0 +1,31 @@
+R -STUDIO:
+---
+  title: "R Notebook"
+  output: html_notebook
+---
+  
+install.packages("DESeq2")
+  
+
+library(DESeq2)
+library(ggplot2)
+  
+
+Counts <- read.delim("count_table.csv", header = TRUE, row.names = 1, sep = ",")
+Counts
+
+
+Counts <- Counts[which(rowSums(Counts) > 50), ]
+Counts
+
+condition <- factor((c("S","S","S","S","N","N","N","N")))
+colnames(Counts)
+coldata<- data.frame(row.names = colnames(Counts),condition)
+coldata
+
+dds <- DESeqDataSetFromMatrix(countData = Counts, colData = coldata, design = ~condition)
+dds <- DESeq(dds)
+vsdata <- vst(dds, blind = FALSE, fitType = "local" ) 
+plotPCA(vsdata, intgroup = "condition")
+splotDispEsts(dds)
+

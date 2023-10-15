@@ -1,0 +1,23 @@
+fold_changes <- c(rep(1, 45), rep(2, 5))  
+
+>  fasta_file <- "Copy path to genome file" 
+
+> sequences <- readDNAStringSet(fasta_file) 
+
+> sj_fasta <- sequences[1:50]  
+
+> num_reps <- c(2, 2)  
+
+> readspertx <- round(5 * width(sj_fasta) / 100)  
+
+> writeXStringSet(sj_fasta, 'sj.fa')  
+
+> simulate_experiment("small.fa", 
+
+                       reads_per_transcript = readspertx, 
+
+                       num_reps = num_reps,  
+
+                       fold_changes = fold_changes, 
+
+                       outdir = "sim") 
