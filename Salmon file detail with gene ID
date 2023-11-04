@@ -1,0 +1,44 @@
+library(GenomicFeatures)
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("GenomicRanges")
+
+
+
+# Install and load the rtracklayer package
+if (!requireNamespace("rtracklayer", quietly = TRUE))
+  install.packages("rtracklayer")
+library(rtracklayer)
+
+# Read the GTF file
+gtf_file <- "C:/Users/sijin/OneDrive - Queensland University of Technology/Sem 3/IFN 646/Project/Data/genomic.gtf"
+gtf <- readGFF(gtf_file)
+
+# Extract transcript and gene IDs
+transcript_id <-  gtf$transcript_id
+gene_id <- gtf$gene_id
+
+# Create a data frame with transcript and gene IDs
+gtf1 <- data.frame(TranscriptID = transcript_id, GeneID = gene_id)
+
+
+
+# Example inner join based on the "TranscriptID" column
+
+res_df <- as.data.frame(res)
+gtf_df <- as.data.frame(gtf1)
+
+
+row_names <- rownames(res_df)
+res_df$TranscriptID <- row_names
+
+
+merged_data <- merge(gtf_df,res_df, by = "TranscriptID", all = FALSE)
+
+left <- merge(res_df, gtf_df, by.x = "TranscriptID", by.y = "TranscriptID", all.x = TRUE)
+
+res_df <- na.omit(res_df)
+
+df_sig <- res_df[res_df$pvalue < 0.05, ]
