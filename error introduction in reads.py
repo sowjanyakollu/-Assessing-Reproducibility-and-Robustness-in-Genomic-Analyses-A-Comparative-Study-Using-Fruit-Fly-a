@@ -1,32 +1,39 @@
 import random
 
-# Function to introduce a 1% error in a read
-def introduce_error(read, error_rate=0.01):
-    error_count = int(len(read) * error_rate)
-    positions = random.sample(range(len(read)), error_count)
-    new_read = list(read)
-    for position in positions:
-        new_read[position] = random.choice("ACGT".replace(read[position], ""))
-    return ''.join(new_read)
+def introduce_substitution_error(read, error_rate):
+    """
+    Introduce substitution errors in a read.
+    """
+    bases = ['A', 'C', 'G', 'T']
+    error_read = ""
+    for base in read:
+        if random.random() < error_rate:
+            # Randomly select a substitution
+            substitute = random.choice([b for b in bases if b != base])
+            error_read += substitute
+        else:
+            error_read += base
+    return error_read
 
-# Simulate 500 reads and introduce a 1% error in each read
-genome = "ATCG" * 1000  # Replace this with your actual genome
-read_length = 50
-num_reads = 500
+# Read the original reads from a FASTA file
+fasta_file = "C:/Users/n11233958/Downloads/IFN 646 PROJECT/oneprecenterrortoall/sample_04_1.fasta"
+original_reads = {}
+current_sequence = ""
+with open(fasta_file, "r") as f:
+    for line in f:
+        if line.startswith(">"):
+            current_sequence = line.strip()
+            original_reads[current_sequence] = ""
+        else:
+            original_reads[current_sequence] += line.strip()
 
-reads_with_error = []
-for i in range(num_reads):
-    start_position = random.randint(0, len(genome) - read_length)
-    read = genome[start_position:start_position + read_length]
-    read_with_error = introduce_error(read)
-    reads_with_error.append(read_with_error)
+error_rate = 0.01  # Adjust this rate to control the error level
 
-# Save the reads with errors to a file in FASTA format
-output_file = "reads_with_error.fasta"
-with open(output_file, "w") as file:
-    for i, read in enumerate(reads_with_error):
-        header = f">Read_{i + 1}\n"
-        file.write(header)
-        file.write(read + "\n")
+# Introduce errors to the selected reads in the same input file
+with open(fasta_file, "w") as f:
+    for seq_id, read in original_reads.items():
+        errored_sequence = introduce_substitution_error(read, error_rate)
+        f.write(seq_id + "\n")
+        f.write(errored_sequence + "\n")
 
-print(f"Reads with errors saved to '{output_file}'")
+print("Errored sequences written to", fasta_file)
